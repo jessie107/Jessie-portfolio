@@ -3,39 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Jessie - Portfolio</title>
-    <!-- Add this script before any other scripts -->
-    <script>
-      // Path helper function for all images
-      function getCorrectPath(path) {
-        // Check if we're on GitHub Pages
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        if (isGitHubPages) {
-          // Get repository name from URL path
-          const pathSegments = window.location.pathname.split('/');
-          const repoName = pathSegments[1] || '';
-          
-          // Only add repo name if this is a project page (not user page)
-          if (repoName && repoName !== '') {
-            return '/' + repoName + '/' + path;
-          }
-        }
-        return path;
-      }
-      
-      // Replace image sources when the page loads
-      document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('img').forEach(function(img) {
-          const originalSrc = img.getAttribute('src');
-          img.setAttribute('src', getCorrectPath(originalSrc));
-        });
-      });
-    </script>
+    <!-- REMOVE ALL PATH MANIPULATION SCRIPTS FROM HEAD -->
     <link rel="stylesheet" href="portfolio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <script src="fix-images.js"></script>
   </head>
   <body>
 
@@ -929,7 +902,7 @@
       </div>
     </div>
     
-    <script src="portfolio.js"></script>
+   <script src="portfolio.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init({offset:0});
