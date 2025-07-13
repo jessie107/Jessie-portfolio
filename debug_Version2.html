@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debug Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+    .test { margin: 20px 0; padding: 10px; background: #f5f5f5; border-radius: 5px; }
+    .success { color: green; }
+    .error { color: red; }
+    button { padding: 5px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Website Debug Tool</h1>
+  
+  <div class="test">
+    <h2>1. JavaScript Loading Test</h2>
+    <div id="js-test">Testing...</div>
+    <button onclick="testJS()">Run Test</button>
+  </div>
+  
+  <div class="test">
+    <h2>2. File Path Test</h2>
+    <div id="path-test">Select a file to test:</div>
+    <div>
+      <button onclick="testFile('portfolio.js')">Test portfolio.js</button>
+      <button onclick="testFile('portfolio.css')">Test portfolio.css</button>
+      <button onclick="testFile('main.jpg')">Test main.jpg</button>
+    </div>
+  </div>
+  
+  <div class="test">
+    <h2>3. Repository Information</h2>
+    <div id="repo-info"></div>
+    <button onclick="getRepoInfo()">Show Info</button>
+  </div>
+
+  <script>
+    function testJS() {
+      document.getElementById('js-test').innerHTML = 
+        '<span class="success">JavaScript is working!</span>';
+    }
+    
+    function testFile(filename) {
+      const result = document.getElementById('path-test');
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            result.innerHTML = `<span class="success">✓ File ${filename} found!</span>`;
+          } else {
+            result.innerHTML = `<span class="error">✗ File ${filename} not found (${xhr.status})</span>`;
+          }
+        }
+      };
+      xhr.open('HEAD', filename);
+      xhr.send();
+    }
+    
+    function getRepoInfo() {
+      const info = document.getElementById('repo-info');
+      info.innerHTML = `
+        <p><strong>Current URL:</strong> ${window.location.href}</p>
+        <p><strong>Page Path:</strong> ${window.location.pathname}</p>
+        <p><strong>Domain:</strong> ${window.location.hostname}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
